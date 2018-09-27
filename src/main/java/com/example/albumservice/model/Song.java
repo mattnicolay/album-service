@@ -7,20 +7,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Album {
+public class Song {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   private String name;
   private String year;
+  private String duration;
 
-  public Album(String name, String year) {
+  public Song(String name, String year, String duration) {
     this.name = name;
     this.year = year;
-  }
-
-  public Album() {
-
+    this.duration = duration;
   }
 
   public long getId() {
@@ -47,6 +45,14 @@ public class Album {
     this.year = year;
   }
 
+  public String getDuration() {
+    return duration;
+  }
+
+  public void setDuration(String duration) {
+    this.duration = duration;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -55,23 +61,25 @@ public class Album {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Album album = (Album) o;
-    return id == album.id &&
-        Objects.equals(name, album.name) &&
-        Objects.equals(year, album.year);
+    Song song = (Song) o;
+    return id == song.id &&
+        Objects.equals(name, song.name) &&
+        Objects.equals(year, song.year) &&
+        Objects.equals(duration, song.duration);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, year);
+    return Objects.hash(id, name, year, duration);
   }
 
   @Override
   public String toString() {
-    return "Album{" +
+    return "Song{" +
         "id=" + id +
         ", name='" + name + '\'' +
         ", year='" + year + '\'' +
+        ", duration='" + duration + '\'' +
         '}';
   }
 }
